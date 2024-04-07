@@ -1,0 +1,42 @@
+name: Python Application Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+      - name: Setup PostgreSQL
+        uses: Harmon758/postgresql-action@v1.0.0
+        with:
+          # Version of PostgreSQL to use
+          postgresql version: 13.2-alpine
+          # POSTGRES_DB - name for the default database that is created
+          postgresql db: fpv_db_dev
+          # POSTGRES_USER - create the specified user with superuser power
+          postgresql user: fpv_user_dev
+          # POSTGRES_PASSWORD - superuser password
+          postgresql password: pfv_user_pwd
+      - name: Test with pytest
+        run: |
+          pip install pytest
+          pytest .

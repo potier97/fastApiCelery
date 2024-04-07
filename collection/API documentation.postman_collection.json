@@ -1,0 +1,1121 @@
+{
+	"info": {
+		"_postman_id": "93a7c99c-b61a-4a91-948e-c19cf6c84301",
+		"name": "API documentation",
+		"description": "# 📄 Get started here\n\nThis template contains a boilerplate for documentation that you can quickly customize and reuse.\n\n## 🔖 How to use this template\n\n- Replace the content given brackets (()) with your API's details.\n- Tips are formatted in `codespan` - feel free to read and remove them.\n    \n\n---\n\n`Start with a brief overview of what your API offers.`\n\nThe ((product name)) provides many API products, tools, and resources that enable you to ((add product value here)).\n\n`You can also list the APIs you offer, link to the relevant pages, or do both in this section.`\n\n## **Getting started guide**\n\n`List the steps or points required to start using your APIs. Make sure to cover everything required to reach success with your API as quickly as possible.`\n\nTo start using the ((add APIs here)), you need to -\n\n`The points given below are from The Postman API's documentation. You can reference it to write your own getting started guide.`\n\n- You must use a valid API Key to send requests to the API endpoints. You can get your API key from Postman's [integrations dashboard](https://go.postman.co/settings/me/api-keys).\n- The API has [rate and usage limits](https://postman.postman.co/workspace/Collection-Templates~6311738d-2e70-441f-ae12-78caf078c5b7/collection/22517504-e9c28f47-1253-44af-a2f3-20dce4da1f18?ctx=documentation#rate-and-usage-limits).\n- The API only responds to HTTPS-secured communications. Any requests sent via HTTP return an HTTP 301 redirect to the corresponding HTTPS resources.\n- The API returns request responses in JSON format. When an API request returns an error, it is sent in the JSON response as an error key.\n    \n\n## Authentication\n\n`Add details on the authorization keys/tokens required, steps that cover how to get them, and the relevant error codes.`\n\nThe ((product name)) API uses ((add your API's authorization type)) for authentication.\n\n`The details given below are from the Postman API's documentation. You can reference it to write your own authentication section.`\n\nPostman uses API keys for authentication. You can generate a Postman API key in the [API keys](https://postman.postman.co/settings/me/api-keys) section of your Postman account settings.\n\nYou must include an API key in each request to the Postman API with the X-Api-Key request header.\n\n### Authentication error response\n\nIf an API key is missing, malformed, or invalid, you will receive an HTTP 401 Unauthorized response code.\n\n## Rate and usage limits\n\n`Use this section to cover your APIs' terms of use. Include API limits, constraints, and relevant error codes, so consumers understand the permitted API usage and practices.`\n\n`The example given below is from The Postman API's documentation. Use it as a reference to write your APIs' terms of use.`\n\nAPI access rate limits apply at a per-API key basis in unit time. The limit is 300 requests per minute. Also, depending on your plan, you may have usage limits. If you exceed either limit, your request will return an HTTP 429 Too Many Requests status code.\n\nEach API response returns the following set of headers to help you identify your use status:\n\n| Header | Description |\n| --- | --- |\n| `X-RateLimit-Limit` | The maximum number of requests that the consumer is permitted to make per minute. |\n| `X-RateLimit-Remaining` | The number of requests remaining in the current rate limit window. |\n| `X-RateLimit-Reset` | The time at which the current rate limit window resets in UTC epoch seconds. |\n\n### 503 response\n\nAn HTTP `503` response from our servers indicates there is an unexpected spike in API access traffic. The server is usually operational within the next five minutes. If the outage persists or you receive any other form of an HTTP `5XX` error, [contact support](https://support.postman.com/hc/en-us/requests/new/).\n\n### **Need some help?**\n\n`Add links that customers can refer to whenever they need help.`\n\nIn case you have questions, go through our tutorials ((link to your video or help documentation here)). Or visit our FAQ page ((link to the relevant page)).\n\nOr you can check out our community forum, there’s a good chance our community has an answer for you. Visit our developer forum ((link to developer forum)) to review topics, ask questions, and learn from others.\n\n`You can also document or add links to libraries, code examples, and other resources needed to make a request.`",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10832015"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Check if status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if response has format JSON\", function() {\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if json has an access key\", function() {\r",
+									"    pm.response.to.have.jsonBody(\"jwt\");\r",
+									"    var json = JSON.parse(responseBody);\r",
+									"    pm.environment.set(\"jwt\", `${json.jwt}`);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"nicolas11@yopmal.com\",\r\n  \"password\": \"Contraseña1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"nicolas3@yopmal.com\",\r\n  \"password\": \"Contraseña1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 16:59:03 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "233"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"ha ingresado correctamente\",\n    \"jwt\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaWQiOjEsInVzZXJuYW1lIjoiTmljb2xhczMifSwiZXhwIjoxNzEyMzQ3MTQzfQ.TToQEmj0TC2glH15NpWIlSKvEtnkeTBM1aHxkrsDEOE\",\n    \"user\": \"nicolas3@yopmal.com\"\n}"
+						},
+						{
+							"name": "Bad Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"nicolas@yopmal.com\",\r\n  \"password\": \"Contraseña1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:00:15 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "37"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Credenciales incorrectas\"\n}"
+						},
+						{
+							"name": "Bad Body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email2\": \"pepito@yopmal.com\",\r\n  \"password\": \"Contraseña1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:00:44 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "192"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": [\n        {\n            \"type\": \"missing\",\n            \"loc\": [\n                \"body\",\n                \"email\"\n            ],\n            \"msg\": \"Field required\",\n            \"input\": {\n                \"email2\": \"pepito@yopmal.com\",\n                \"password\": \"Contraseña1\"\n            },\n            \"url\": \"https://errors.pydantic.dev/2.6/v/missing\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "SignUp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Nicolas1\",\r\n  \"password1\": \"Contraseña1\",\r\n  \"password2\": \"Contraseña1\",\r\n  \"email\": \"nicolas11@yopmal.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/signup",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"signup"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "User Already Exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"Nicolas4\",\r\n  \"password1\": \"Contraseña1\",\r\n  \"password2\": \"Contraseña1\",\r\n  \"email\": \"nicolas4@yopmal.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/auth/signup",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:01:04 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "43"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"El nombre de usuario ya existe\"\n}"
+						},
+						{
+							"name": "Successfull Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"Nicolas5\",\r\n  \"password1\": \"Contraseña1\",\r\n  \"password2\": \"Contraseña1\",\r\n  \"email\": \"nicolas5@yopmal.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/auth/signup",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:01:18 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "65"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"La cuenta ha sido creada exitosamente\",\n    \"result\": true\n}"
+						},
+						{
+							"name": "Bad Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"Nicolas5\",\r\n  \"password1\": \"Contraeña1\",\r\n  \"password2\": \"Contraseña1\",\r\n  \"email\": \"nicolas5@yopmal.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/auth/signup",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:01:36 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "42"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"Las contraseñas no coinciden\"\n}"
+						},
+						{
+							"name": "Email Already Exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"Nicolas6\",\r\n  \"password1\": \"Contraseña1\",\r\n  \"password2\": \"Contraseña1\",\r\n  \"email\": \"nicolas5@yopmal.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/auth/signup",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:01:58 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "55"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": \"El correo electrónico ya está registrado\"\n}"
+						},
+						{
+							"name": "Bad Body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"Nicolas6\",\r\n  \"password\": \"Contraseña1\",\r\n  \"password2\": \"Contraseña1\",\r\n  \"email\": \"nicolas5@yopmal.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/auth/signup",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "date",
+									"value": "Fri, 05 Apr 2024 17:02:26 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "246"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"detail\": [\n        {\n            \"type\": \"missing\",\n            \"loc\": [\n                \"body\",\n                \"password1\"\n            ],\n            \"msg\": \"Field required\",\n            \"input\": {\n                \"username\": \"Nicolas6\",\n                \"password\": \"Contraseña1\",\n                \"password2\": \"Contraseña1\",\n                \"email\": \"nicolas5@yopmal.com\"\n            },\n            \"url\": \"https://errors.pydantic.dev/2.6/v/missing\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			],
+			"description": "The `/me` endpoints let you manage information about the authenticated user."
+		},
+		{
+			"name": "Task",
+			"item": [
+				{
+					"name": "Get All by User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/tasks/?max=10&order=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "max",
+									"value": "10"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 12345678,\n        \"username\": \"taylor-lee\",\n        \"email\": \"taylor.lee@example.com\",\n        \"fullName\": \"Taylor Lee\",\n        \"avatar\": \"https://example.com/user/r5u9qpvmujfjf6lbqmga.jpg\",\n        \"isPublic\": true\n    },\n    \"operations\": [\n        {\n            \"name\": \"mock_usage\",\n            \"limit\": 1000000,\n            \"usage\": 110276,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"monitor_request_runs\",\n            \"limit\": 10000000,\n            \"usage\": 1141750,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"api_usage\",\n            \"limit\": 1000000,\n            \"usage\": 16240,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"custom_domains\",\n            \"limit\": 25,\n            \"usage\": 25,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"serverless_requests\",\n            \"limit\": 10000,\n            \"usage\": 0,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"integrations\",\n            \"limit\": 5000,\n            \"usage\": 1018,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"cloud_agent_requests\",\n            \"limit\": 1000000,\n            \"usage\": 1615,\n            \"overage\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/tasks/all?max=10",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"all"
+							],
+							"query": [
+								{
+									"key": "max",
+									"value": "10"
+								},
+								{
+									"key": "order",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": []
+				},
+				{
+					"name": "Get One by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/tasks/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 12345678,\n        \"username\": \"taylor-lee\",\n        \"email\": \"taylor.lee@example.com\",\n        \"fullName\": \"Taylor Lee\",\n        \"avatar\": \"https://example.com/user/r5u9qpvmujfjf6lbqmga.jpg\",\n        \"isPublic\": true\n    },\n    \"operations\": [\n        {\n            \"name\": \"mock_usage\",\n            \"limit\": 1000000,\n            \"usage\": 110276,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"monitor_request_runs\",\n            \"limit\": 10000000,\n            \"usage\": 1141750,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"api_usage\",\n            \"limit\": 1000000,\n            \"usage\": 16240,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"custom_domains\",\n            \"limit\": 25,\n            \"usage\": 25,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"serverless_requests\",\n            \"limit\": 10000,\n            \"usage\": 0,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"integrations\",\n            \"limit\": 5000,\n            \"usage\": 1018,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"cloud_agent_requests\",\n            \"limit\": 1000000,\n            \"usage\": 1615,\n            \"overage\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteOne by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/tasks/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								"1"
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 12345678,\n        \"username\": \"taylor-lee\",\n        \"email\": \"taylor.lee@example.com\",\n        \"fullName\": \"Taylor Lee\",\n        \"avatar\": \"https://example.com/user/r5u9qpvmujfjf6lbqmga.jpg\",\n        \"isPublic\": true\n    },\n    \"operations\": [\n        {\n            \"name\": \"mock_usage\",\n            \"limit\": 1000000,\n            \"usage\": 110276,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"monitor_request_runs\",\n            \"limit\": 10000000,\n            \"usage\": 1141750,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"api_usage\",\n            \"limit\": 1000000,\n            \"usage\": 16240,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"custom_domains\",\n            \"limit\": 25,\n            \"usage\": 25,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"serverless_requests\",\n            \"limit\": 10000,\n            \"usage\": 0,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"integrations\",\n            \"limit\": 5000,\n            \"usage\": 1018,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"cloud_agent_requests\",\n            \"limit\": 1000000,\n            \"usage\": 1615,\n            \"overage\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create One",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{jwt}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/nicol/Escritorio/FPV_Freestyle.mp4"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/tasks/?max=3&order=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"tasks",
+								""
+							],
+							"query": [
+								{
+									"key": "max",
+									"value": "3"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Gets information about the authenticated user."
+					},
+					"response": [
+						{
+							"name": "Successful Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"id\": 12345678,\n        \"username\": \"taylor-lee\",\n        \"email\": \"taylor.lee@example.com\",\n        \"fullName\": \"Taylor Lee\",\n        \"avatar\": \"https://example.com/user/r5u9qpvmujfjf6lbqmga.jpg\",\n        \"isPublic\": true\n    },\n    \"operations\": [\n        {\n            \"name\": \"mock_usage\",\n            \"limit\": 1000000,\n            \"usage\": 110276,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"monitor_request_runs\",\n            \"limit\": 10000000,\n            \"usage\": 1141750,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"api_usage\",\n            \"limit\": 1000000,\n            \"usage\": 16240,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"custom_domains\",\n            \"limit\": 25,\n            \"usage\": 25,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"serverless_requests\",\n            \"limit\": 10000,\n            \"usage\": 0,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"integrations\",\n            \"limit\": 5000,\n            \"usage\": 1018,\n            \"overage\": 0\n        },\n        {\n            \"name\": \"cloud_agent_requests\",\n            \"limit\": 1000000,\n            \"usage\": 1615,\n            \"overage\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Rate Limit Exceeded",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://api.getpostman.com/me",
+									"protocol": "https",
+									"host": [
+										"api",
+										"getpostman",
+										"com"
+									],
+									"path": [
+										"me"
+									]
+								}
+							},
+							"status": "Too Many Requests",
+							"code": 429,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": {
+										"content": "",
+										"type": "text/plain"
+									}
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": \"rateLimited\",\n    \"message\": \"Rate limit exceeded. Please retry after 1669048687\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
